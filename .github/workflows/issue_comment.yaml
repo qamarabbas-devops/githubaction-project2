@@ -34,9 +34,8 @@ jobs:
         - name: Create comment with API
           run: |
             gh api --method POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            /repos/${ORGANIZATION}/${REPOSITORY}/issues/${ISSUE_NUMBER}/comments \
-            -F body="Comment but from the API call, not an action."
+            /repos/${{ github.event.repository.owner.login }}/${{ github.event.repository.name }}/issues/${{ github.event.issue.number }}/comments \
+            -f body="Comment but from the API call, not an action."
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             ORGANIZATION: ${{ github.event.organization.login }}
